@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default ({ postId }) => {
+const CommentList= ({ postId }) => {
   const [comments, setComments] = useState([]);
 
   const fetchData = async () => {
@@ -14,6 +14,7 @@ export default ({ postId }) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const renderedComments = comments.map(comment => {
@@ -22,3 +23,5 @@ export default ({ postId }) => {
 
   return <ul>{renderedComments}</ul>;
 };
+
+export default CommentList
