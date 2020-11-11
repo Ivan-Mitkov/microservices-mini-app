@@ -1,10 +1,11 @@
 const express = require("express");
 const { randomBytes } = require("crypto");
+const cors = require("cors");
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors())
 const posts = {};
 app.get("/posts", (req, res) => {
   res.send(posts);
@@ -16,7 +17,7 @@ app.post("/posts", (req, res) => {
     id,
     title,
   };
-  res.send(posts[id])
+  res.send(posts[id]);
 });
 
 app.listen(4000, () => {
