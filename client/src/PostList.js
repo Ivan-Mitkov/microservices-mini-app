@@ -3,15 +3,12 @@ import axios from "axios";
 import CommentCreate from "./CommentCreate";
 import CommentList from "./CommentList";
 
-const PostList= () => {
-  const [posts, setPosts] = useState([]);
+const PostList = () => {
+  const [posts, setPosts] = useState({});
 
   const fetchPosts = async () => {
     const res = await axios.get("http://localhost:4000/posts");
-    const arrPost = Object.values(res.data);
-    console.log(arrPost);
-
-    setPosts(arrPost);
+    setPosts(res.data);
   };
 
   useEffect(() => {
@@ -19,7 +16,7 @@ const PostList= () => {
     // eslint-disable-next-line
   }, []);
 
-  const renderedPosts = posts.map((post) => {
+  const renderedPosts = Object.values(posts).map((post) => {
     return (
       <div
         className="card"
@@ -34,7 +31,6 @@ const PostList= () => {
       </div>
     );
   });
-  console.log(renderedPosts);
   return (
     <div className="d-flex flex-row flex-wrap justify-content-between">
       {renderedPosts}
@@ -42,4 +38,4 @@ const PostList= () => {
   );
 };
 
-export default PostList
+export default PostList;
