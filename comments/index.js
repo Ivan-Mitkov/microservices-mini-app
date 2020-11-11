@@ -35,5 +35,5 @@ app.post("/events", (req, res) => {
   res.send({});
 });
 app.listen(4001, () => {
-  console.log("Posts server listen on port 4001");
+  console.log("Comments server listen on port 4001");
 });
