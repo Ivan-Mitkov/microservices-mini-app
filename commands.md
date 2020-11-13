@@ -57,3 +57,19 @@ kubectl apply -f [config file name]
 ### print out some information about the running pod
 
 kubectl describe pod [pod name]
+
+### list of all running deployments
+
+kubectl get deployments
+
+### print out some information about the specific deployment
+
+kubectl describe deployment [depl-name]
+
+### create a deployment from config file
+
+kubectl apply -f [config file name]
+
+### delete a deployment
+
+kubectl delete deployment [depl-name]
