@@ -73,3 +73,16 @@ kubectl apply -f [config file name]
 ### delete a deployment
 
 kubectl delete deployment [depl-name]
+
+# Updating deployment
+
+#### put :latest in version in yaml config file
+
+#### rebuild image go to correct directory
+docker build -t [name] .
+
+#### push image to dockerhub
+docker push [my docker id]/[name]
+
+#### tell the deployment to run this latest version
+kubectl rollout restart deployment [name]
