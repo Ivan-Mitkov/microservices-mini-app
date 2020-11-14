@@ -1,0 +1,41 @@
+# deployment config
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  # find all pods that have label app moderation
+  selector:
+    matchLabels:
+      # app doesn't have any special meaning it could be any word
+      app: moderation
+  # apply this config to the pods
+  template:
+    metadata:
+      # we want pods to have label app: moderation
+      labels:
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: ivanmitkov/moderation:latest
+# after change config kubectl apply -f [config file name]
+#create multiple objects in one file
+---
+#configuration for Cluster IP service
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv
+spec:
+  selector:
+    app: moderation
+  #optional default is ClusterIP
+  type: ClusterIP
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003
+      targetPort: 4003

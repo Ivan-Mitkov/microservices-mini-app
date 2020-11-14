@@ -113,3 +113,11 @@ kubectl describe service [name]
 ##### access service in browser from random port NodePort: posts 3xxxx/TCP
 
 ##### for Docker for Mac/Windows address is: localhost:32299/posts
+
+### appply all config files with one command
+
+kubectl apply -f .
+
+### debug error
+
+kubectl describe pod [pod name]
