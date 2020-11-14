@@ -12,7 +12,7 @@ app.post("/events", async (req, res) => {
     //moderation logic if include 'orange' reject
     const status = data.content.includes("orange") ? "rejected" : "approved";
     //emit event to route of event bus
-    await axios.post("http://localhost:4005/events", {
+    await axios.post("http://event-bus-srv:4005/events", {
       type: "CommentModerated",
       data: {
         id: data.id,
