@@ -19,7 +19,8 @@ app.post("/posts", async (req, res) => {
     title,
   };
   //emit event to event bus
-  await axios.post("http://localhost:4005/events", {
+  //change address to k8s service name
+  await axios.post("http://event-bus-srv:4005/events", {
     type: "PostCreated",
     data: { id, title },
   });

@@ -22,3 +22,21 @@ spec:
         - name: posts
           image: ivanmitkov/posts:latest
 # after change config kubectl apply -f [config file name]
+#create multiple objects in one file
+---
+#configuration for Cluster IP service
+apiVersion: v1
+kind: Service
+metadata:
+  #we have already service named posts-srv so change the name
+  name: posts-clusterip-srv
+spec:
+  selector:
+    app: posts
+  #optional default is ClusterIP
+  type: ClusterIP
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

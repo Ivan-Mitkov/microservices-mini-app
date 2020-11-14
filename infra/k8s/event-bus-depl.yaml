@@ -22,3 +22,20 @@ spec:
         - name: event-bus
           image: ivanmitkov/event-bus:latest
 # after change config kubectl apply -f [config file name]
+#create multiple objects in one file
+---
+#configuration for Cluster IP service
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  selector:
+    app: event-bus
+  #optional default is ClusterIP
+  type: ClusterIP
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 4005
+      targetPort: 4005
