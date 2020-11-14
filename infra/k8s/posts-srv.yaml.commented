@@ -1,0 +1,22 @@
+# servive config only versin not name of the app
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  # type of service we want to create
+  type: NodePort
+  # find all pods that have label app posts
+  selector:
+    # what pod to expose to outside word name from template label in depl
+    app: posts
+  # all ports to expose to the target pod
+  ports:
+    #name is for logging it could be whenever we want
+    - name: posts
+      # port of the Node Port service this trafic is redirected to targetPort
+      # both ports do not have to be identical, but usualy are
+      protocol: TCP
+      # actual port the application is listening from server posts
+      port: 4000
+      targetPort: 4000

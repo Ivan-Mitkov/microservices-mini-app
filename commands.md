@@ -79,10 +79,37 @@ kubectl delete deployment [depl-name]
 #### put :latest in version in yaml config file
 
 #### rebuild image go to correct directory
+
 docker build -t [name] .
 
 #### push image to dockerhub
+
 docker push [my docker id]/[name]
 
 #### tell the deployment to run this latest version
+
 kubectl rollout restart deployment [name]
+
+# Create services
+
+#### from infra/k8s
+
+kubectl apply -f [config file name]
+
+#### get all services
+
+kubectl get services
+
+##### access service from outside node
+
+#### result is: posts-srv NodePort 10.99.38.203 <none> 4000:32299/TCP 105s
+
+### service description
+
+kubectl describe service [name]
+
+### just for development
+
+##### access service in browser from random port NodePort: posts 3xxxx/TCP
+
+##### for Docker for Mac/Windows address is: localhost:32299/posts
