@@ -108,8 +108,23 @@ add ENV CI=true in Docker file in react
 localhost:[port] to posts.com
 
 ### build image for react app
+
 docker build -t ivanmitkov/client .
 docker push ivanmitkov/client
+
 ### create config file for client
+
 ### add to cluster from k8s
+
 kubectl apply -f client-depl.yaml
+
+# Unique path in ingress controller
+
+ingress controller doesn't understand REST verbs so we need to create unique paths and not to use POST GET etc.
+after changing routes in client and backend
+build images again and push to docker hub
+rollout restart deployment
+
+### update ingress controller config file
+reaply ingress-srv from its dir
+kubectl apply -f ingress-srv.yaml
