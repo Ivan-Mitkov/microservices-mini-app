@@ -68,3 +68,48 @@ kubectl get pods
 get logs
 kubectl logs [name]
 received event: PostCreated
+
+# Add react application
+
+https://github.com/kubernetes/ingress-nginx
+https://kubernetes.github.io/ingress-nginx/deploy/
+
+## add ingress controller
+
+#### command for Mac the same is for windows
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
+
+##### Verify installation
+
+kubectl get pods -n ingress-nginx \
+ -l app.kubernetes.io/name=ingress-nginx --watch
+
+## create ingress service config file
+
+#### form k8s folder apply config file
+
+kubectl apply -f ingress-srv.yaml
+
+### trick windows to use localhost when try to connect to posts.com
+
+C:\Windows\System32\drivers\etc
+add in file hosts
+127.0.0.1 posts.com
+check in browser
+go to http://posts.com/posts
+
+#### change Dockerfile in react
+
+add ENV CI=true in Docker file in react
+
+#### change all requests in react app to use posts.com
+
+localhost:[port] to posts.com
+
+### build image for react app
+docker build -t ivanmitkov/client .
+docker push ivanmitkov/client
+### create config file for client
+### add to cluster from k8s
+kubectl apply -f client-depl.yaml
