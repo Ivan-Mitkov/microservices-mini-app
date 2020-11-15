@@ -126,5 +126,32 @@ build images again and push to docker hub
 rollout restart deployment
 
 ### update ingress controller config file
+
 reaply ingress-srv from its dir
 kubectl apply -f ingress-srv.yaml
+
+# Steps when making changes
+
+### used mainly in production
+
+deployment must use latest tag in the pod spec section
+make an update to code
+build the image
+push the image to docker hub
+run the command kubectl rollout restart deployment [depl-name]
+
+# using Skaffold
+
+skaffold.dev
+
+##### create skaffold config file
+
+skaffold init
+set manual sync
+run skaffold dev
+if error run skaffold dev again
+open on posts.com
+restarting auto because of nodemon and create-react-app not included in skaffold
+ctr + c stop skaffold and clean up local objects
+for pushed objects
+skaffold delete

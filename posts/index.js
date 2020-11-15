@@ -33,6 +33,6 @@ app.post("/events", (req, res) => {
   res.send({});
 });
 app.listen(4000, () => {
-  console.log("update");
+  console.log("update again");
   console.log("Posts server listen on port 4000");
 });

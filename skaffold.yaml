@@ -1,0 +1,67 @@
+apiVersion: skaffold/v2beta9
+kind: Config
+metadata:
+  name: mini-app-microservices
+build:
+  local:
+    push: false
+  artifacts:
+  - image: ivanmitkov/client
+    context: client
+    docker: 
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: 'src/**/*.js'
+          dest: .
+  - image: ivanmitkov/comments
+    context: comments
+    docker: 
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: '*.js'
+          dest: .
+  - image: ivanmitkov/event-bus
+    context: eventbus
+    docker: 
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: '*.js'
+          dest: .
+  - image: ivanmitkov/moderation
+    context: moderation
+    docker: 
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: '*.js'
+          dest: .
+  - image: ivanmitkov/posts
+    context: posts
+    docker: 
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: '*.js'
+          dest: .
+  - image: ivanmitkov/query
+    context: query
+    docker: 
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: '*.js'
+          dest: .
+deploy:
+  kubectl:
+    manifests:
+    - infra/k8s/client-depl.yaml
+    - infra/k8s/comments-depl.yaml
+    - infra/k8s/event-bus-depl.yaml
+    - infra/k8s/ingress-srv.yaml
+    - infra/k8s/moderation-depl.yaml
+    - infra/k8s/posts-depl.yaml
+    - infra/k8s/posts-srv.yaml
+    - infra/k8s/query-depl.yaml
